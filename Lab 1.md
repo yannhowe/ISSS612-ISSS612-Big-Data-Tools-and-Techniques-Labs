@@ -37,9 +37,21 @@ In this section, you will create a key pair using the Amazon EC2 console. This k
 
 Create your key pair using the Amazon EC2 console
 1.	Open the Amazon EC2 console at https://console.aws.amazon.com/ec2/.
+
+![Imgur](http://i.imgur.com/AjzsLuRh.jpg)
+
 2.	In the navigation pane, under NETWORK & SECURITY, choose Key Pairs.
+
+![Imgur](https://i.imgur.com/gmruMS5.png)
+
 3.	Choose Create Key Pair.
+
+![Imgur](http://i.imgur.com/msNFnEih.png)
+
 4.	Enter `aws_emr_key` for the new key pair in the Key pair name field of the Create Key Pair dialog box, and then choose Create.
+
+![Imgur](http://i.imgur.com/g713BEqh.png)
+
 5.	The private key file is automatically downloaded by your browser. The base file name is the name you specified as the name of your key pair, and the file name extension is `.pem`
 6.	**Save the private key file on your Mac or PC desktop**
 > Important! This is the only chance for you to save the private key file. You'll need to provide the name of your key pair when you launch an instance and the corresponding private key each time you connect to the instance.
@@ -52,16 +64,33 @@ Amazon EMR securely and reliably handles a broad set of big data use cases, incl
 
 1.	Sign in to the AWS Management Console and open the Amazon EMR console at https://console.aws.amazon.com/elasticmapreduce/.
 2.	Choose Create cluster
+
+![Imgur](http://i.imgur.com/za7ow8Ch.jpg)
+
 3.	Choose Go to advanced options
+
+![Imgur](http://i.imgur.com/XaWK7Pqh.jpg)
+
 4.	Choose *at least* Hadoop, Hive, Hue and Spark for this lab and any other packages you might be interested in using
+
+![Imgur](http://i.imgur.com/mtacH3hh.jpg)
+
 5.	Click Next
-6.	Choose the number of instances needed. Minimum is single node configuration, for which Master nodes are 1, Core and Task nodes can be 0
 7.	Select m3.xlarge EC2 instance type for master node and 0 Instance count for core nodes. We do not need any core or task nodes for your hands-on and we can minimize the charges of running your EMR custer.
+
+![Imgur](http://i.imgur.com/oSOdEGuh.jpg)
+
 8.	Click Next
 9.	Provide a cluster name
 10.	Disable Termination Protection
+
+![Imgur](http://i.imgur.com/ScxMcxBh.jpg)
+
 11.	Click Next
 12.	Choose the EC2 key pair `aws_emr_key` previously created
+
+![Imgur](http://i.imgur.com/U76mfk1h.jpg)
+
 13.	Click “Create Cluster”
 
 AWS will begin spinning up the EC2 instances and configuring the Hadoop applications selected on the instances. **This could take over 10 minutes**.
@@ -74,13 +103,25 @@ When you see the following screen, the cluster is ready
 Before connecting to your master node you must allow inbound traffic for port 22 (SSH) to access the command line as well as port 8888 (Hue Web Server) to access the web-based interface from your browser to the instance where your master node resides.
 
 1.	Access the EC2 Dashboard by clicking on `Services` -> `Compute` -> `EC2`
+
+![Imgur](http://i.imgur.com/AjzsLuRh.jpg)
+
 1.  In the sidebar of the Amazon EC2 console under `NETWORK & SECURITY` choose `Security Groups`
+
+![Imgur](http://i.imgur.com/xrwML85h.jpg)
+
 2.	On your right, select the group with the group name `ElasticMapReduce-master`
 3.	Click on Actions and select `Edit Inbound rules`.
+
+![Imgur](http://i.imgur.com/SFJqwHnh.jpg)
+
 4.	Click on `Add Rule`. In the new row that appears, select `SSH` under `Type`
 5.	Under source, select `Anywhere` and the empty text box on the right hand side will be filled with ‘0.0.0.0/0’ automatically.
 4.	Click on `Add Rule`. In the new row that appears, enter `8888` under `Port Range`.
 5.	Under source, select `Anywhere` and the empty text box on the right hand side will be filled with ‘0.0.0.0/0’ automatically.
+
+![Imgur](http://i.imgur.com/ld2cEA7h.jpg)
+
 6.	Click Save. You should then see the new rule the next time you view Edit Inbound rules.
 
 > Note: A list of other default incoming ports you may need to allow can be found here - http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-web-interfaces.html
